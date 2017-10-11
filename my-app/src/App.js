@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Button, Table, Row, Col, Input, Icon} from 'react-materialize'
+import {Button, Table, NavItem, Input, Icon} from 'react-materialize'
 
 import projectService from './services/project';
+import userService from './services/user';
 
 import NavbarComponent from './components/Navbar';
 import Modal from './components/Modal';
@@ -14,16 +15,28 @@ class App extends Component {
 
     this.state = {
       loading: true,
-      newName: ''
+      newName: '',
+      user: null
     };
 
-    projectService.get()
-      .then(data => {
-        this.setState({data: data.projects, loading: false})
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    const result = Promise.all([
+      projectService.get()
+        .then(data => {
+          this.setState({data: data.projects})
+        })
+        .catch(e => {
+          console.log(e);
+        }),
+      userService.get('8aaaa9a2-fbfe-4a1e-901a-d167c6300805')
+        .then(data => {
+          console.log('userData', data);
+          this.setState({user: data})
+        })
+        .catch(e => {
+          console.log(e);
+        })]);
+
+    result.then(() => this.setState({loading: false}));
 
     this.onChange = this.onChange.bind(this);
     this.onChangeEdit = this.onChangeEdit.bind(this);
@@ -74,10 +87,16 @@ class App extends Component {
     this.setState({currentProjectId: id, currentProjectName: currentProject.name});
   }
 
+  showFullname() {
+    return <span><Icon left tiny>face</Icon>{this.state.user.first_name} {this.state.user.last_name}</span>;
+  }
+
   renderBody() {
     return (
       <div>
-      <NavbarComponent/>
+      <NavbarComponent>
+        {this.state.user ? this.showFullname() : <NavItem href='components.html'>Login</NavItem>}
+      </NavbarComponent>
         <div className="container">
           <div className="section">
         <Table>
@@ -92,7 +111,7 @@ class App extends Component {
               <Modal id="modal_edit" header="Edit project name" onSave={this.onEdit}>
                 <Input label="Name" onChange={this.onChangeEdit} value={this.state.currentProjectName}/>
               </Modal>
-              <Button data-target="modal_add" className="btn modal-trigger" floating small waves='light' icon='add'/>
+              <Button data-target="modal_add" className="btn modal-trigger" floating small waves="light" icon="add"/>
             </th>
           </tr>
           </thead>

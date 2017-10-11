@@ -1,17 +1,28 @@
 {
   "projects": {
-    "projects":[
+    "projects": [
+      {
+        "id": "aa1",
+        "name": "name1"
+      },
+      {
+        "id": "aa2",
+        "name": "name2"
+      },
+      {
+        "id": "aa3",
+        "name": "name3"
+      }
+    ]
+  },
+  "users": [
     {
-      "id": "aa1",
-      "name": "name1"
-    },
-    {
-      "id": "aa2",
-      "name": "name2"
-    },
-    {
-      "id": "aa3",
-      "name": "name3"
+      "id": "8aaaa9a2-fbfe-4a1e-901a-d167c6300805",
+      "username": "testuser",
+      "email": "some@email.com",
+      "password": "flo123",
+      "first_name": "Ivato",
+      "last_name": "Nazar"
     }
-  ]}
+  ]
 }

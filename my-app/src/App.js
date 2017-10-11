@@ -62,7 +62,7 @@ class App extends Component {
     projectService.post(userId, this.state.newName)
       .then(data => {
         let updatedData = this.state.data;
-        updatedData.push({id: data.id, name: data.name});
+        updatedData.push({id: data.id, name: this.state.newName});
         this.setState({data: updatedData, newName: ''});
       })
       .catch(e => {

@@ -9,6 +9,8 @@ import Modal from './components/Modal';
 
 import './App.css';
 
+const userId = '8aaaa9a2-fbfe-4a1e-901a-d167c6300805';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,14 +22,14 @@ class App extends Component {
     };
 
     const result = Promise.all([
-      projectService.get()
+      projectService.get(userId)
         .then(data => {
           this.setState({data: data.projects})
         })
         .catch(e => {
           console.log(e);
         }),
-      userService.get('8aaaa9a2-fbfe-4a1e-901a-d167c6300805')
+      userService.get(userId)
         .then(data => {
           console.log('userData', data);
           this.setState({user: data})
@@ -57,7 +59,7 @@ class App extends Component {
   }
 
   onAdd() {
-    projectService.post(this.state.newName)
+    projectService.post(userId, this.state.newName)
       .then(data => {
         let updatedData = this.state.data;
         updatedData.push({id: data.id, name: data.name});
@@ -71,7 +73,7 @@ class App extends Component {
   onEdit(e) {
     const {currentProjectId, currentProjectName} = this.state;
 
-    projectService.put({id: currentProjectId, name: currentProjectName})
+    projectService.patch(userId, currentProjectId, {name: currentProjectName})
       .then(data => {
         let updatedData = this.state.data;
         const index = updatedData.findIndex(val => val.id === currentProjectId);

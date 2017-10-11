@@ -1,5 +1,5 @@
 export default {
-  get: () => fetch('http://localhost:8081/poc/users/532reqfsczdfc/projects', {
+  get: (userId) => fetch(`http://localhost:8081/poc/users/${userId}/projects`, {
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -14,7 +14,7 @@ export default {
     throw error;
   }),
 
-  post: (name) => fetch('http://localhost:8081/poc/users/532reqfsczdfc/projects', {
+  post: (userId, name) => fetch(`http://localhost:8081/poc/users/${userId}/projects`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -33,8 +33,8 @@ export default {
       throw error;
     }),
 
-  put: (data) => fetch('http://localhost:8081/poc/users/532reqfsczdfc/projects', {
-    method: 'put',
+  patch: (userId, projectId, data) => fetch(`http://localhost:8081/poc/users/${userId}/projects/${projectId}`, {
+    method: 'patch',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

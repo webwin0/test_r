@@ -1,4 +1,5 @@
 {
-  "/poc/users/532reqfsczdfc/projects": "/projects",
+  "/poc/users/8aaaa9a2-fbfe-4a1e-901a-d167c6300805/projects": "/projects",
+  "/poc/users/8aaaa9a2-fbfe-4a1e-901a-d167c6300805/projects/:projectId": "/projects",
   "/poc/users/:id": "/users/:id"
 }

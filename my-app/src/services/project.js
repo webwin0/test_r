@@ -14,15 +14,15 @@ export default {
     throw error;
   }),
 
-  post: (name) => fetch('/poc/users/532reqfsczdfc/projects', {
+  post: (name) => fetch('http://localhost:8081/poc/users/532reqfsczdfc/projects', {
     method: 'post',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
+    body: JSON.stringify({
       name
-    }
+    })
   })
     .then(response => {
       if (response.ok) {

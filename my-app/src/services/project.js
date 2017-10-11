@@ -31,5 +31,22 @@ export default {
       const error = new Error(response.statusText);
       error.response = response;
       throw error;
+    }),
+
+  put: (data) => fetch('http://localhost:8081/poc/users/532reqfsczdfc/projects', {
+    method: 'put',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      const error = new Error(response.statusText);
+      error.response = response;
+      throw error;
     })
 }

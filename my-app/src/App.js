@@ -105,10 +105,10 @@ class App extends Component {
             <th>Id</th>
             <th>Name</th>
             <th>
-              <Modal id="modal_add" header="Add project name" onSave={this.onAdd}>
+              <Modal id="modal_add" header="Create project" onSave={this.onAdd}>
                 <Input label="Name" onChange={this.onChange} value={this.state.newName}/>
               </Modal>
-              <Modal id="modal_edit" header="Edit project name" onSave={this.onEdit}>
+              <Modal id="modal_edit" header="Edit project" onSave={this.onEdit}>
                 <Input label="Name" onChange={this.onChangeEdit} value={this.state.currentProjectName}/>
               </Modal>
               <Button data-target="modal_add" className="btn modal-trigger" floating small waves="light" icon="add"/>

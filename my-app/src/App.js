@@ -74,8 +74,9 @@ class App extends Component {
     projectService.put({id: currentProjectId, name: currentProjectName})
       .then(data => {
         let updatedData = this.state.data;
-        updatedData.push({id: +new Date(), name: this.state.newName});
-        this.setState({data: updatedData, newName: ''});
+        const index = updatedData.findIndex(val => val.id === currentProjectId);
+        updatedData[index].name = currentProjectName;
+        this.setState({data: updatedData});
       })
       .catch(e => {
         console.log(e);

@@ -6,6 +6,8 @@ import projectService from './services/project';
 import NavbarComponent from './components/Navbar';
 import Modal from './components/Modal';
 
+import './App.css';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,9 @@ class App extends Component {
     projectService.get()
       .then(data => {
         this.setState({data: data.projects, loading: false})
+      })
+      .catch(e => {
+        console.log(e);
       });
 
     this.onChange = this.onChange.bind(this);
